@@ -1,0 +1,199 @@
+strict digraph "" {
+	node [label="\N"];
+	B0	[label="B0:\n/**\l* @file student_grade_system.c\l* @brief A basic command-line system for managing student grades in C.\l*\l* This program \
+allows a user to add new students with their scores, display\l* all student records, and calculate the average score of all students.\l* \
+It demonstrates the use of structs, arrays, loops, and conditionals for\l* data management.\l*\l* Core Concepts Illustrated:\l* \
+- struct: Defines a 'Student' data type to logically group related\l* information (ID, name, score).\l* - Arrays: An array of 'Student' \
+structs is used to store the records\l* for multiple students.\l* - for loop: Used extensively to iterate through the array of students \
+for\l* displaying data, adding new records, and calculating statistics.\l* - do-while loop: Manages the main menu, allowing the \
+user to perform\l* multiple actions until they choose to exit.\l* - if/else statements: Used for input validation (e.g., checking \
+if the\l* database is full) and for assigning letter grades based on scores.\l* - Variables and Reassignment: Variables like 'student_\
+count' and array\l* elements are continuously updated as the user interacts with the system.\l* - Functions: The program is modularized, \
+with functions for each major\l* feature (adding, displaying, etc.) to enhance readability and reuse.\l*/\l#include <stdio.h>\l#\
+include <string.h>\l#include <stdlib.h>\l// --- Constants and Type Definitions ---\l#define MAX_STUDENTS 50\l#define MAX_NAME_LENGTH \
+50\l// Define a structure to hold student data\ltypedef struct {\lint id;\lchar name[MAX_NAME_LENGTH];\ldouble score;\l} Student;\l",
+		shape=box];
+	B1	[label="B1:\n// --- Global Data Store ---\lStudent student_database[MAX_STUDENTS];\lint student_count = 0; // Keeps track of the number \
+of students added\l// --- Function Prototypes ---\lvoid display_menu();\lint get_menu_choice();\lvoid add_student();\lvoid display_\
+all_students();\lvoid calculate_average_score();\lchar get_letter_grade(double score);\lvoid clear_input_buffer();\lvoid read_string(\
+char *str, int max_len);\l/**\l* @brief Main function to run the student management system.\l*\l* Contains the main application \
+loop which displays a menu and calls\l* the appropriate function based on the user's choice. The loop\l* continues until the user \
+decides to exit.\l*/\lint main() {\lint choice;\ldo {\ldisplay_menu();\lchoice = get_menu_choice();\l",
+		shape=box];
+	B0 -> B1;
+	B2	[label="B2:\nswitch (choice) {\l",
+		shape=box];
+	B1 -> B2;
+	B3	[label="B3:\ncase 1:\ladd_student();\lbreak;\l",
+		shape=box];
+	B2 -> B3;
+	B5	[label="B5:\ncase 3:\lcalculate_average_score();\lbreak;\l",
+		shape=box];
+	B3 -> B5;
+	B4	[label="B4:\ncase 2:\ldisplay_all_students();\lbreak;\l",
+		shape=box];
+	B6	[label="B6:\ncase 4:\lprintf(\"Exiting the program. Goodbye!\n\");\lbreak;\l",
+		shape=box];
+	B4 -> B6;
+	B7	[label="B7:\ndefault:\lprintf(\"Invalid choice. Please enter a number between 1 and 4.\n\");\lbreak;\l}\l",
+		shape=box];
+	B5 -> B7;
+	B8	[label="B8:\nprintf(\"\nPress Enter to continue...\");\lclear_input_buffer();\l} while (choice != 4);\l",
+		shape=box];
+	B6 -> B8;
+	B7 -> B8;
+	B9	[label="B9:\nreturn 0;\l}\l",
+		shape=box];
+	B8 -> B9;
+	B10	[label="B10:\n/**\l* @brief Displays the main menu options to the user.\l*/\lvoid display_menu() {\lsystem(\"clear || cls\"); // Clears the \
+console screen (works on Linux/Windows)\lprintf(\"==========================================\n\");\lprintf(\"   Student Grade Management \
+System\n\");\lprintf(\"==========================================\n\");\lprintf(\"1. Add a New Student\n\");\lprintf(\"2. Display All \
+Students\n\");\lprintf(\"3. Calculate Average Score\n\");\lprintf(\"4. Exit\n\");\lprintf(\"------------------------------------------\n\");\l}\l",
+		shape=box];
+	B9 -> B10;
+	B11	[label="B11:\n/**\l* @brief Prompts the user for a menu choice and returns it.\l*\l* @return The integer value of the user's choice.\l*/\lint \
+get_menu_choice() {\lint choice = 0;\lprintf(\"Enter your choice: \");\l// Loop until a valid integer is entered\l",
+		shape=box];
+	B10 -> B11;
+	B12	[label="B12:\nwhile (scanf(\"%d\", &choice) != 1) {\l",
+		shape=box];
+	B11 -> B12;
+	B13	[label="B13:\nprintf(\"Invalid input. Please enter a number: \");\lclear_input_buffer();\l}\l",
+		shape=box];
+	B12 -> B13;
+	B14	[label="B14:\nclear_input_buffer(); // Crucial for consuming the rest of the line\lreturn choice;\l}\l",
+		shape=box];
+	B12 -> B14;
+	B13 -> B14;
+	B15	[label="B15:\n/**\l* @brief Adds a new student record to the database.\l*\l* Prompts the user for the student's ID, name, and score. It \
+validates\l* the score and checks if the database has space.\l*/\lvoid add_student() {\l",
+		shape=box];
+	B14 -> B15;
+	B16	[label="B16:\nif (student_count >= MAX_STUDENTS) {\l",
+		shape=box];
+	B15 -> B16;
+	B17	[label="B17:\nprintf(\"Error: Student database is full. Cannot add more students.\n\");\lreturn;\l}\l",
+		shape=box];
+	B16 -> B17;
+	B18	[label="B18:\nprintf(\"\n--- Add New Student ---\n\");\l// Get Student ID\lprintf(\"Enter Student ID: \");\lint new_id;\l",
+		shape=box];
+	B16 -> B18;
+	B17 -> B18;
+	B19	[label="B19:\nwhile (scanf(\"%d\", &new_id) != 1) {\l",
+		shape=box];
+	B18 -> B19;
+	B20	[label="B20:\nprintf(\"Invalid ID. Please enter a number: \");\lclear_input_buffer();\l}\l",
+		shape=box];
+	B19 -> B20;
+	B21	[label="B21:\nclear_input_buffer();\l// Create a temporary student and assign the ID\lStudent new_student;\lnew_student.id = new_id;\l// \
+Get Student Name\lprintf(\"Enter Student Name: \");\lread_string(new_student.name, MAX_NAME_LENGTH);\l// Get Student Score\ldouble \
+new_score = -1.0;\lprintf(\"Enter Student Score (0-100): \");\l",
+		shape=box];
+	B19 -> B21;
+	B20 -> B21;
+	B22	[label="B22:\nwhile (scanf(\"%lf\", &new_score) != 1 || new_score < 0 || new_score > 100) {\l",
+		shape=box];
+	B21 -> B22;
+	B23	[label="B23:\nprintf(\"Invalid score. Please enter a number between 0 and 100: \");\lclear_input_buffer();\l}\l",
+		shape=box];
+	B22 -> B23;
+	B24	[label="B24:\nclear_input_buffer();\lnew_student.score = new_score;\l// Add the new student to the database array\lstudent_database[student_\
+count] = new_student;\lstudent_count++; // Increment the total count of students\lprintf(\"\nStudent added successfully!\n\");\l}\l",
+		shape=box];
+	B22 -> B24;
+	B23 -> B24;
+	B25	[label="B25:\n/**\l* @brief Displays all student records currently in the database.\l*\l* If no students are present, it prints a message. \
+Otherwise, it iterates\l* through the student array and prints each record in a formatted table.\l*/\lvoid display_all_students() {\lprintf(\"\n--- \
+List of All Students ---\n\");\l",
+		shape=box];
+	B24 -> B25;
+	B26	[label="B26:\nif (student_count == 0) {\l",
+		shape=box];
+	B25 -> B26;
+	B27	[label="B27:\nprintf(\"No students in the database.\n\");\lreturn;\l}\l",
+		shape=box];
+	B26 -> B27;
+	B28	[label="B28:\nprintf(\"----------------------------------------------------------\n\");\lprintf(\"| %-5s | %-25s | %-10s | %-5s |\n\", \"ID\", \"\
+Name\", \"Score\", \"Grade\");\lprintf(\"----------------------------------------------------------\n\");\l// Loop through all students \
+and print their details\l",
+		shape=box];
+	B26 -> B28;
+	B27 -> B28;
+	B29	[label="B29:\nfor (int i = 0; i < student_count; i++) {\l",
+		shape=box];
+	B28 -> B29;
+	B30	[label="B30:\nchar grade = get_letter_grade(student_database[i].score);\lprintf(\"| %-5d | %-25s | %-10.2f | %-5c |\n\",\lstudent_database[\
+i].id,\lstudent_database[i].name,\lstudent_database[i].score,\lgrade);\l}\l",
+		shape=box];
+	B29 -> B30;
+	B31	[label="B31:\nprintf(\"----------------------------------------------------------\n\");\l}\l",
+		shape=box];
+	B29 -> B31;
+	B30 -> B31;
+	B32	[label="B32:\n/**\l* @brief Calculates and displays the average score of all students.\l*/\lvoid calculate_average_score() {\lprintf(\"\n--- \
+Average Score Calculation ---\n\");\l",
+		shape=box];
+	B31 -> B32;
+	B33	[label="B33:\nif (student_count == 0) {\l",
+		shape=box];
+	B32 -> B33;
+	B34	[label="B34:\nprintf(\"Cannot calculate average. No students in the database.\n\");\lreturn;\l}\l",
+		shape=box];
+	B33 -> B34;
+	B35	[label="B35:\ndouble total_score = 0.0;\l// Loop to sum up all scores\l",
+		shape=box];
+	B33 -> B35;
+	B34 -> B35;
+	B36	[label="B36:\nfor (int i = 0; i < student_count; i++) {\l",
+		shape=box];
+	B35 -> B36;
+	B37	[label="B37:\ntotal_score += student_database[i].score;\l}\l",
+		shape=box];
+	B36 -> B37;
+	B38	[label="B38:\ndouble average = total_score / student_count;\lprintf(\"The average score for %d student(s) is: %.2f\n\", student_count, average);\l}\l",
+		shape=box];
+	B36 -> B38;
+	B37 -> B38;
+	B39	[label="B39:\n/**\l* @brief Converts a numerical score to a letter grade.\l*\l* @param score The numerical score.\l* @return The corresponding \
+letter grade (A, B, C, D, or F).\l*/\lchar get_letter_grade(double score) {\l",
+		shape=box];
+	B38 -> B39;
+	B40	[label="B40:\nif (score >= 90.0) {\l",
+		shape=box];
+	B39 -> B40;
+	B41	[label="B41:\nreturn 'A';\l} else if (score >= 80.0) {\l",
+		shape=box];
+	B40 -> B41;
+	B42	[label="B42:\nreturn 'B';\l} else if (score >= 70.0) {\l",
+		shape=box];
+	B40 -> B42;
+	B41 -> B42;
+	B43	[label="B43:\nreturn 'C';\l} else if (score >= 60.0) {\l",
+		shape=box];
+	B42 -> B43;
+	B44	[label="B44:\nreturn 'D';\l} else {\l",
+		shape=box];
+	B43 -> B44;
+	B45	[label="B45:\nreturn 'F';\l}\l}\l",
+		shape=box];
+	B44 -> B45;
+	B46	[label="B46:\n/**\l* @brief Safely reads a line of string input from the user.\l*\l* This function reads a string from stdin and removes \
+the trailing newline\l* character, making it safer than using scanf(\"%s\", ...).\l* @param str The buffer to store the string in.\l* @\
+param max_len The maximum number of characters to read.\l*/\lvoid read_string(char *str, int max_len) {\lfgets(str, max_len, stdin);\l// \
+Remove the trailing newline character, if it exists\lsize_t len = strlen(str);\l",
+		shape=box];
+	B45 -> B46;
+	B47	[label="B47:\nif (len > 0 && str[len - 1] == '\n') {\l",
+		shape=box];
+	B46 -> B47;
+	B48	[label="B48:\nstr[len - 1] = '\0';\l}\l}\l",
+		shape=box];
+	B47 -> B48;
+	B49	[label="B49:\n/**\l* @brief Clears the standard input buffer.\l*/\lvoid clear_input_buffer() {\lint c;\l",
+		shape=box];
+	B47 -> B49;
+	B48 -> B49;
+	B50	[label="B50:\nwhile ((c = getchar()) != '\n' && c != EOF);\l}\l",
+		shape=box];
+	B49 -> B50;
+}

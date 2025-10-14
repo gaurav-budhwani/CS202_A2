@@ -1,0 +1,208 @@
+strict digraph "" {
+	node [label="\N"];
+	B0	[label="B0:\n/**\l* @file text_adventure_game.c\l* @brief A simple, self-contained text-based adventure game in C.\l*\l* This program demonstrates \
+the use of loops, conditionals (if/else),\l* and variable reassignment to create an interactive story. The player\l* navigates through \
+different rooms, makes choices, and tries to find\l* the treasure without running out of health.\l*\l* Core Concepts Illustrated:\l* \
+- while loop: Manages the main game loop, running until a game-over\l* condition is met.\l* - if/else if/else statements: Control \
+the game's logic based on the\l* player's current location and input.\l* - Variables and Reassignment: Player health, score, current \
+location,\l* and inventory flags are stored in variables that change throughout the game.\l* - Standard I/O: Uses printf() for displaying \
+text and scanf() for\l* reading player input.\l* - Functions: The code is modularized into functions for better\l* readability and \
+organization.\l*/\l#include <stdio.h>\l#include <stdlib.h>\l#include <ctype.h>\l// --- Game State Variables ---\lint player_health = \
+100;\lint player_score = 0;\lint current_room = 0; // 0: Start, 1: Armory, 2: Dark Forest, 3: Treasure Room, 4: Trap Room\lint has_\
+sword = 0;    // A boolean flag (0 for false, 1 for true)\lint has_key = 0;      // A boolean flag\lint game_over = 0;    // A boolean \
+flag to control the main game loop\l// --- Function Prototypes ---\lvoid display_introduction();\lvoid display_status();\lvoid handle_\
+room_start();\lvoid handle_room_armory();\lvoid handle_room_dark_forest();\lvoid handle_room_treasure();\lvoid handle_room_trap();\lint \
+get_player_choice();\lvoid clear_input_buffer();\l/**\l* @brief The main function, entry point of the program.\l*\l* Initializes \
+the game and runs the main game loop. The loop continues\l* as long as the 'game_over' flag is not set. Inside the loop, it displays\l* \
+the player's status and handles the logic for the current room.\l*/\lint main() {\ldisplay_introduction();\l// Main game loop\l",
+		shape=box];
+	B1	[label="B1:\nwhile (game_over == 0) {\l",
+		shape=box];
+	B0 -> B1;
+	B2	[label="B2:\ndisplay_status();\l",
+		shape=box];
+	B1 -> B2;
+	B33	[label="B33:\nprintf(\"There is nothing else of interest here.\n\");\lprintf(\"1. Go back to the starting chamber.\n\");\lprintf(\"Choose your \
+action (1): \");\lget_player_choice(); // Wait for user input\lcurrent_room = 0; // Go back\l}\l}\l",
+		shape=box];
+	B1 -> B33;
+	B3	[label="B3:\nif (current_room == 0) {\l",
+		shape=box];
+	B2 -> B3;
+	B4	[label="B4:\nhandle_room_start();\l} else if (current_room == 1) {\l",
+		shape=box];
+	B3 -> B4;
+	B3 -> B33;
+	B5	[label="B5:\nhandle_room_armory();\l} else if (current_room == 2) {\l",
+		shape=box];
+	B4 -> B5;
+	B6	[label="B6:\nhandle_room_dark_forest();\l} else if (current_room == 3) {\l",
+		shape=box];
+	B5 -> B6;
+	B7	[label="B7:\nhandle_room_treasure();\l} else if (current_room == 4) {\l",
+		shape=box];
+	B6 -> B7;
+	B8	[label="B8:\nhandle_room_trap();\l} else {\l",
+		shape=box];
+	B7 -> B8;
+	B9	[label="B9:\nprintf(\"An unknown error occurred. Invalid room state.\n\");\lgame_over = 1;\l}\l",
+		shape=box];
+	B8 -> B9;
+	B10	[label="B10:\n// Check for game over condition (player health)\l",
+		shape=box];
+	B9 -> B10;
+	B11	[label="B11:\nif (player_health <= 0) {\l",
+		shape=box];
+	B10 -> B11;
+	B12	[label="B12:\nprintf(\"\nYour health has dropped to zero. You have perished.\n\");\lprintf(\"GAME OVER!\n\");\lgame_over = 1;\l}\l}\l",
+		shape=box];
+	B11 -> B12;
+	B11 -> B33;
+	B13	[label="B13:\nprintf(\"\nFinal Score: %d\n\", player_score);\lprintf(\"Thank you for playing!\n\");\lreturn 0;\l}\l",
+		shape=box];
+	B12 -> B13;
+	B14	[label="B14:\n/**\l* @brief Displays the introductory text for the game.\l*/\lvoid display_introduction() {\lprintf(\"======================================\n\");\lprintf(\" \
+Welcome to the C Adventure Game!\n\");\lprintf(\"======================================\n\");\lprintf(\"Your goal is to find the hidden \
+treasure.\n\");\lprintf(\"Navigate through the rooms and make wise choices.\n\");\lprintf(\"Good luck!\n\");\l}\l",
+		shape=box];
+	B13 -> B14;
+	B15	[label="B15:\n/**\l* @brief Displays the player's current health, score, and inventory.\l*/\lvoid display_status() {\lprintf(\"\n--------------------------------------\n\");\lprintf(\"\
+Health: %d | Score: %d | \", player_health, player_score);\l",
+		shape=box];
+	B14 -> B15;
+	B16	[label="B16:\nif (has_sword) {\l",
+		shape=box];
+	B15 -> B16;
+	B17	[label="B17:\nprintf(\"Inventory: Sword \");\l}\l",
+		shape=box];
+	B16 -> B17;
+	B16 -> B33;
+	B18	[label="B18:\nif (has_key) {\l",
+		shape=box];
+	B17 -> B18;
+	B19	[label="B19:\nprintf(\"Key \");\l}\l",
+		shape=box];
+	B18 -> B19;
+	B18 -> B33;
+	B20	[label="B20:\nprintf(\"\n--------------------------------------\n\");\l}\l",
+		shape=box];
+	B19 -> B20;
+	B21	[label="B21:\n/**\l* @brief Handles the logic for the starting room (Room 0).\l*/\lvoid handle_room_start() {\lprintf(\"You are in a dimly \
+lit starting chamber. The air is cold.\n\");\lprintf(\"There are two doors in front of you.\n\");\lprintf(\"1. Go to the door on the \
+LEFT.\n\");\lprintf(\"2. Go to the door on the RIGHT.\n\");\lprintf(\"Choose your path (1 or 2): \");\lint choice = get_player_choice();\l",
+		shape=box];
+	B20 -> B21;
+	B22	[label="B22:\nif (choice == 1) {\l",
+		shape=box];
+	B21 -> B22;
+	B23	[label="B23:\nprintf(\"\nYou chose the left door and enter an old armory.\n\");\lcurrent_room = 1; // Move to the Armory\l} else if (choice == \
+2) {\l",
+		shape=box];
+	B22 -> B23;
+	B22 -> B33;
+	B24	[label="B24:\nprintf(\"\nYou chose the right door and step into a dark forest.\n\");\lcurrent_room = 2; // Move to the Dark Forest\l} else {\l",
+		shape=box];
+	B23 -> B24;
+	B25	[label="B25:\nprintf(\"Invalid choice. You hesitate and waste time.\n\");\lplayer_health -= 5; // Penalty for invalid choice\l}\l}\l",
+		shape=box];
+	B24 -> B25;
+	B26	[label="B26:\n/**\l* @brief Handles the logic for the armory (Room 1).\l*/\lvoid handle_room_armory() {\lprintf(\"You are in an armory. Rusted \
+weapons line the walls.\n\");\l",
+		shape=box];
+	B25 -> B26;
+	B27	[label="B27:\nif (has_sword == 0) {\l",
+		shape=box];
+	B26 -> B27;
+	B28	[label="B28:\nprintf(\"You see a sturdy SWORD lying on a table.\n\");\lprintf(\"1. Take the SWORD.\n\");\lprintf(\"2. Leave the armory and go \
+back to the start.\n\");\lprintf(\"Choose your action (1 or 2): \");\lint choice = get_player_choice();\l",
+		shape=box];
+	B27 -> B28;
+	B27 -> B33;
+	B29	[label="B29:\nif (choice == 1) {\l",
+		shape=box];
+	B28 -> B29;
+	B30	[label="B30:\nprintf(\"\nYou pick up the sword. It feels heavy but reliable.\n\");\lhas_sword = 1;\lplayer_score += 20;\l} else if (choice == \
+2) {\l",
+		shape=box];
+	B29 -> B30;
+	B29 -> B33;
+	B31	[label="B31:\nprintf(\"\nYou decide to leave the armory.\n\");\lcurrent_room = 0; // Go back\l} else {\l",
+		shape=box];
+	B30 -> B31;
+	B32	[label="B32:\nprintf(\"Invalid choice. You stumble and lose some health.\n\");\lplayer_health -= 5;\l}\l} else {\l",
+		shape=box];
+	B31 -> B32;
+	B32 -> B33;
+	B35	[label="B35:\nif (has_sword == 1) {\l",
+		shape=box];
+	B33 -> B35;
+	B34	[label="B34:\n/**\l* @brief Handles the logic for the dark forest (Room 2).\l*/\lvoid handle_room_dark_forest() {\lprintf(\"You are in a \
+dark forest. You hear strange noises.\n\");\lprintf(\"A goblin jumps out from behind a tree!\n\");\l",
+		shape=box];
+	B34 -> B35;
+	B36	[label="B36:\nprintf(\"You have a sword to defend yourself!\n\");\lprintf(\"1. Fight the goblin.\n\");\lprintf(\"2. Try to flee.\n\");\lprintf(\"\
+Choose your action (1 or 2): \");\lint choice = get_player_choice();\l",
+		shape=box];
+	B35 -> B36;
+	B37	[label="B37:\nif (choice == 1) {\l",
+		shape=box];
+	B35 -> B37;
+	B36 -> B37;
+	B38	[label="B38:\nprintf(\"\nYou fight bravely and defeat the goblin!\n\");\lprintf(\"Behind the goblin, you find a hidden door and a key.\n\");\lplayer_\
+score += 50;\lhas_key = 1;\lcurrent_room = 3; // Go to treasure room\l} else {\l",
+		shape=box];
+	B37 -> B38;
+	B39	[label="B39:\nprintf(\"\nYou try to flee but the goblin strikes you as you run.\n\");\lplayer_health -= 30;\lcurrent_room = 0; // Flee back \
+to start\l}\l} else {\l",
+		shape=box];
+	B37 -> B39;
+	B38 -> B39;
+	B40	[label="B40:\nprintf(\"You are unarmed! The goblin attacks you.\n\");\lprintf(\"You take a serious blow before managing to escape.\n\");\lplayer_\
+health -= 50;\lcurrent_room = 0; // Forced to flee\l}\l}\l",
+		shape=box];
+	B39 -> B40;
+	B41	[label="B41:\n/**\l* @brief Handles the logic for the treasure room (Room 3).\l*/\lvoid handle_room_treasure() {\lprintf(\"You are in a magnificent \
+room filled with gold!\n\");\l",
+		shape=box];
+	B40 -> B41;
+	B42	[label="B42:\nif (has_key == 1) {\l",
+		shape=box];
+	B41 -> B42;
+	B43	[label="B43:\nprintf(\"Your key fits the lock on a large treasure chest.\n\");\lprintf(\"You open it and find the legendary treasure!\n\");\lplayer_\
+score += 100;\lprintf(\"\nCONGRATULATIONS! YOU HAVE WON!\n\");\lgame_over = 1;\l} else {\l",
+		shape=box];
+	B42 -> B43;
+	B44	[label="B44:\nprintf(\"You see a large treasure chest, but it is locked.\n\");\lprintf(\"You need a key to open it.\n\");\lprintf(\"1. Look for \
+another way out.\n\");\lprintf(\"Choose your action (1): \");\lget_player_choice();\lprintf(\"You find a hidden passage that leads to \
+a trap!\n\");\lcurrent_room = 4; // Move to trap room\l}\l}\l",
+		shape=box];
+	B42 -> B44;
+	B43 -> B44;
+	B45	[label="B45:\n/**\l* @brief Handles the logic for the trap room (Room 4).\l*/\lvoid handle_room_trap() {\lprintf(\"You've fallen into a pit \
+trap! It was a mistake to come here.\n\");\lplayer_health -= 40;\lprintf(\"You manage to climb out, but you are badly injured.\n\");\lprintf(\"\
+You find yourself back in the starting chamber.\n\");\lcurrent_room = 0; // Go back to start\l}\l",
+		shape=box];
+	B44 -> B45;
+	B46	[label="B46:\n/**\l* @brief Gets and validates player's integer choice.\l* @return The integer choice from the user.\l*/\lint get_player_\
+choice() {\lint choice = 0;\l// Loop until a valid integer is entered\l",
+		shape=box];
+	B45 -> B46;
+	B47	[label="B47:\nwhile (scanf(\"%d\", &choice) != 1) {\l",
+		shape=box];
+	B46 -> B47;
+	B48	[label="B48:\nprintf(\"Invalid input. Please enter a number: \");\lclear_input_buffer();\l}\l",
+		shape=box];
+	B47 -> B48;
+	B49	[label="B49:\nclear_input_buffer(); // Clear any trailing characters\lreturn choice;\l}\l",
+		shape=box];
+	B47 -> B49;
+	B48 -> B49;
+	B50	[label="B50:\n/**\l* @brief Clears the standard input buffer.\l*\l* This is a utility function to prevent scanf from misbehaving when\l* \
+the user enters non-numeric or extra characters. It reads characters\l* until a newline or EOF is found.\l*/\lvoid clear_input_buffer() {\lint \
+c;\l",
+		shape=box];
+	B49 -> B50;
+	B51	[label="B51:\nwhile ((c = getchar()) != '\n' && c != EOF);\l}\l",
+		shape=box];
+	B50 -> B51;
+}

@@ -1,0 +1,177 @@
+strict digraph "" {
+	node [label="\N"];
+	B0	[label="B0:\n/**\l* @file atm_simulator.c\l* @brief A simple, self-contained command-line ATM simulator in C.\l*\l* This program simulates \
+the basic functionalities of an ATM, including\l* PIN validation, checking balance, withdrawing cash, and depositing funds.\l* It'\
+s designed to demonstrate fundamental C programming concepts.\l*\l* Core Concepts Illustrated:\l* - do-while loop: Used for the \
+main menu, ensuring it runs at least once and\l* continues until the user chooses to exit.\l* - while loop: Used for PIN validation, \
+prompting the user repeatedly\l* until the correct PIN is entered or attempts are exhausted.\l* - if/else if/else and switch statements: \
+The switch statement handles menu\l* navigation, while if/else logic is used for validation checks (e.g.,\l* sufficient funds, valid \
+deposit amount).\l* - Variables and Reassignment: Key variables like 'balance', 'pin_attempts',\l* and 'transaction_amount' are \
+continuously updated based on user actions.\l* - Standard I/O: Uses printf() and scanf() for user interaction.\l* - Functions: The \
+code is structured with functions to handle specific\l* tasks like displaying the menu or performing transactions, improving\l* \
+clarity and maintainability.\l*/\l#include <stdio.h>\l#include <stdlib.h>\l// --- Constants ---\l#define CORRECT_PIN 1234\l#define \
+MAX_PIN_ATTEMPTS 3\l// --- Global State ---\ldouble account_balance = 5000.75; // Starting account balance\l// --- Function Prototypes \
+---\lvoid display_welcome_message();\lint validate_pin();\lvoid display_main_menu();\lint get_user_choice();\lvoid perform_transaction(\
+int choice);\lvoid check_balance();\lvoid withdraw_cash();\lvoid deposit_cash();\lvoid clear_input_buffer();\l/**\l* @brief The \
+main function, which drives the ATM simulation.\l*\l* It starts by welcoming the user and validating their PIN. If the PIN is\l* \
+correct, it enters a do-while loop to display the main menu and perform\l* transactions until the user chooses to exit.\l*/\lint \
+main() {\ldisplay_welcome_message();\l// Authenticate the user first\l",
+		shape=box];
+	B1	[label="B1:\nif (validate_pin()) {\l",
+		shape=box];
+	B0 -> B1;
+	B2	[label="B2:\nprintf(\"\nPIN accepted. Access granted.\n\");\lint user_choice;\l// Main application loop\ldo {\ldisplay_main_menu();\luser_\
+choice = get_user_choice();\lperform_transaction(user_choice);\l} while (user_choice != 4);\l} else {\l",
+		shape=box];
+	B1 -> B2;
+	B3	[label="B3:\nprintf(\"\nToo many incorrect PIN attempts. Your card has been locked.\n\");\lprintf(\"Please contact your bank for assistance.\n\");\l}\l",
+		shape=box];
+	B1 -> B3;
+	B2 -> B3;
+	B4	[label="B4:\nprintf(\"\nThank you for using the ATM. Goodbye!\n\");\lreturn 0;\l}\l",
+		shape=box];
+	B3 -> B4;
+	B5	[label="B5:\n/**\l* @brief Displays the initial welcome message to the user.\l*/\lvoid display_welcome_message() {\lprintf(\"=====================================\n\");\lprintf(\"      \
+Welcome to the C-Bank ATM\n\");\lprintf(\"=====================================\n\");\l}\l",
+		shape=box];
+	B4 -> B5;
+	B6	[label="B6:\n/**\l* @brief Prompts the user for a PIN and validates it.\l*\l* @return Returns 1 if the PIN is correct, 0 otherwise.\l* The \
+user has a limited number of attempts.\l*/\lint validate_pin() {\lint entered_pin;\lint attempts = 0;\l",
+		shape=box];
+	B5 -> B6;
+	B7	[label="B7:\nwhile (attempts < MAX_PIN_ATTEMPTS) {\l",
+		shape=box];
+	B6 -> B7;
+	B8	[label="B8:\nprintf(\"Please enter your 4-digit PIN: \");\l// Check if input is a valid integer\l",
+		shape=box];
+	B7 -> B8;
+	B9	[label="B9:\nif (scanf(\"%d\", &entered_pin) != 1) {\l",
+		shape=box];
+	B7 -> B9;
+	B8 -> B9;
+	B10	[label="B10:\nprintf(\"Invalid input. Please enter numbers only.\n\");\lclear_input_buffer();\lattempts++;\lprintf(\"You have %d attempt(s) \
+remaining.\n\n\", MAX_PIN_ATTEMPTS - attempts);\lcontinue; // Skip to the next iteration\l}\l",
+		shape=box];
+	B9 -> B10;
+	B11	[label="B11:\nclear_input_buffer();\l",
+		shape=box];
+	B9 -> B11;
+	B10 -> B11;
+	B12	[label="B12:\nif (entered_pin == CORRECT_PIN) {\l",
+		shape=box];
+	B11 -> B12;
+	B13	[label="B13:\nreturn 1; // Success\l} else {\l",
+		shape=box];
+	B12 -> B13;
+	B14	[label="B14:\nprintf(\"Incorrect PIN.\n\");\lattempts++;\lprintf(\"You have %d attempt(s) remaining.\n\n\", MAX_PIN_ATTEMPTS - attempts);\l}\l}\l",
+		shape=box];
+	B12 -> B14;
+	B13 -> B14;
+	B15	[label="B15:\nreturn 0; // Failure\l}\l",
+		shape=box];
+	B14 -> B15;
+	B16	[label="B16:\n/**\l* @brief Displays the main menu of ATM options.\l*/\lvoid display_main_menu() {\lprintf(\"\n---------- ATM Main Menu ----------\n\");\lprintf(\"\
+1. Check Account Balance\n\");\lprintf(\"2. Withdraw Cash\n\");\lprintf(\"3. Deposit Cash\n\");\lprintf(\"4. Exit\n\");\lprintf(\"-----------------------------------\n\");\l}\l",
+		shape=box];
+	B15 -> B16;
+	B17	[label="B17:\n/**\l* @brief Gets the user's menu choice and validates it.\l*\l* @return The integer choice from the user.\l*/\lint get_user_\
+choice() {\lint choice = 0;\lprintf(\"Please select an option: \");\l// Loop until a valid integer is entered\l",
+		shape=box];
+	B16 -> B17;
+	B18	[label="B18:\nwhile (scanf(\"%d\", &choice) != 1) {\l",
+		shape=box];
+	B17 -> B18;
+	B19	[label="B19:\nprintf(\"Invalid input. Please enter a number (1-4): \");\lclear_input_buffer();\l}\l",
+		shape=box];
+	B18 -> B19;
+	B20	[label="B20:\nclear_input_buffer();\lreturn choice;\l}\l",
+		shape=box];
+	B18 -> B20;
+	B19 -> B20;
+	B21	[label="B21:\n/**\l* @brief Calls the appropriate function based on the user's choice.\l*\l* @param choice The menu option selected by the \
+user.\l*/\lvoid perform_transaction(int choice) {\l",
+		shape=box];
+	B20 -> B21;
+	B22	[label="B22:\nswitch (choice) {\l",
+		shape=box];
+	B21 -> B22;
+	B23	[label="B23:\ncase 1:\lcheck_balance();\lbreak;\l",
+		shape=box];
+	B22 -> B23;
+	B25	[label="B25:\ncase 3:\ldeposit_cash();\lbreak;\l",
+		shape=box];
+	B23 -> B25;
+	B24	[label="B24:\ncase 2:\lwithdraw_cash();\lbreak;\l",
+		shape=box];
+	B26	[label="B26:\ncase 4:\l// The exit message is handled in main\lbreak;\l",
+		shape=box];
+	B24 -> B26;
+	B27	[label="B27:\ndefault:\lprintf(\"Invalid option selected. Please try again.\n\");\lbreak;\l}\l}\l",
+		shape=box];
+	B25 -> B27;
+	B28	[label="B28:\n/**\l* @brief Displays the current account balance.\l*/\lvoid check_balance() {\lprintf(\"\n-> Your current account balance \
+is: $%.2f\n\", account_balance);\l}\l",
+		shape=box];
+	B26 -> B28;
+	B27 -> B28;
+	B29	[label="B29:\n/**\l* @brief Handles the logic for cash withdrawal.\l*\l* Prompts the user for an amount, validates it, and updates the balance.\l*/\lvoid \
+withdraw_cash() {\ldouble amount;\lprintf(\"\n-> Enter the amount to withdraw: $\");\l",
+		shape=box];
+	B28 -> B29;
+	B30	[label="B30:\nif (scanf(\"%lf\", &amount) != 1) {\l",
+		shape=box];
+	B29 -> B30;
+	B31	[label="B31:\nprintf(\"Invalid amount entered.\n\");\lclear_input_buffer();\lreturn;\l}\l",
+		shape=box];
+	B30 -> B31;
+	B32	[label="B32:\nclear_input_buffer();\l",
+		shape=box];
+	B30 -> B32;
+	B31 -> B32;
+	B33	[label="B33:\nif (amount <= 0) {\l",
+		shape=box];
+	B32 -> B33;
+	B34	[label="B34:\nprintf(\"Withdrawal amount must be positive.\n\");\l} else if (amount > account_balance) {\l",
+		shape=box];
+	B33 -> B34;
+	B35	[label="B35:\nprintf(\"Insufficient funds. You cannot withdraw more than you have.\n\");\l} else {\l",
+		shape=box];
+	B33 -> B35;
+	B34 -> B35;
+	B36	[label="B36:\n// Successful withdrawal\laccount_balance = account_balance - amount; // Reassignment\lprintf(\"Please take your cash: $%.2f\n\", \
+amount);\lprintf(\"Your new balance is: $%.2f\n\", account_balance);\l}\l}\l",
+		shape=box];
+	B35 -> B36;
+	B37	[label="B37:\n/**\l* @brief Handles the logic for depositing cash.\l*\l* Prompts the user for an amount, validates it, and updates the balance.\l*/\lvoid \
+deposit_cash() {\ldouble amount;\lprintf(\"\n-> Enter the amount to deposit: $\");\l",
+		shape=box];
+	B36 -> B37;
+	B38	[label="B38:\nif (scanf(\"%lf\", &amount) != 1) {\l",
+		shape=box];
+	B37 -> B38;
+	B39	[label="B39:\nprintf(\"Invalid amount entered.\n\");\lclear_input_buffer();\lreturn;\l}\l",
+		shape=box];
+	B38 -> B39;
+	B40	[label="B40:\nclear_input_buffer();\l",
+		shape=box];
+	B38 -> B40;
+	B39 -> B40;
+	B41	[label="B41:\nif (amount <= 0) {\l",
+		shape=box];
+	B40 -> B41;
+	B42	[label="B42:\nprintf(\"Deposit amount must be positive.\n\");\l} else {\l",
+		shape=box];
+	B41 -> B42;
+	B43	[label="B43:\n// Successful deposit\laccount_balance = account_balance + amount; // Reassignment\lprintf(\"Successfully deposited $%.2f\n\", \
+amount);\lprintf(\"Your new balance is: $%.2f\n\", account_balance);\l}\l}\l",
+		shape=box];
+	B41 -> B43;
+	B42 -> B43;
+	B44	[label="B44:\n/**\l* @brief Clears the standard input buffer to prevent errors.\l*\l* This function is crucial for robustly handling user \
+input with scanf.\l*/\lvoid clear_input_buffer() {\lint c;\l",
+		shape=box];
+	B43 -> B44;
+	B45	[label="B45:\nwhile ((c = getchar()) != '\n' && c != EOF);\l}\l",
+		shape=box];
+	B44 -> B45;
+}
