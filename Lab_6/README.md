@@ -19,6 +19,12 @@ git clone --depth 1 https://github.com/scikit-learn/scikit-learn.git projects/sc
 ### vulnerability analysis tools
 To further run the tools, a shell script has been written for convenience, since repeating a lot of statements consumes a lot of time.
 The ```run_analysis.sh``` file automatically does everything described above as well as runs the tools and stores their output.
+First, make the shell script executable
+
+```
+chmod +x run_analysis.sh
+```
+and then run the shell script:
 
 ```
 ./run_analysis.sh
